@@ -9,19 +9,51 @@
 <body>
     <div class="container">
         <nav class="sidebar">
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
+            <a href="#" data-page="home">Home</a>
+            <a href="#" data-page="about">About</a>
+            <a href="#" data-page="projects">Projects</a>
+            <a href="https://blog.tan-t.im">Blog</a>
+            <a href="#" data-page="composition">Compos</a>
         </nav>
     
         <main class="content">
-            <section id="about">
+
+            <!--Home-->
+            <section id="home" class="page">
+                <h1>TAN-T.IM_</h1>
+                <div class="gallery">
+                    <div class="gallery-container">
+                        <img src="properties/pic/2.jpg" class="gallery-item active" alt="Gallery Image 1">
+                        <img src="properties/pic/3.jpg" class="gallery-item" alt="Gallery Image 2">
+                        <img src="properties/pic/4.jpg" class="gallery-item" alt="Gallery Image 3">
+                        <img src="properties/pic/5.jpg" class="gallery-item" alt="Gallery Image 4">
+                        <img src="properties/pic/6.jpg" class="gallery-item" alt="Gallery Image 5">
+                        <img src="properties/pic/7.jpg" class="gallery-item" alt="Gallery Image 6">
+                        <img src="properties/pic/8.jpg" class="gallery-item" alt="Gallery Image 7">
+                    </div>
+                </div>
                 <h1>About Me</h1>
                 <p>I'm Tim Tan. I'm an <a href="https://www.eng.cam.ac.uk/research/academic-divisions/information-engineering">Information Engineering</a> student studying at <a href="https://cam.ac.uk">the University of Cambridge</a>. I like programming/composing.</p>
+                
+                <h2>Skills</h2>
             </section>
-        
-            <section id="projects">
+
+            <!--About-->
+            <section id="about" class="page">
+                <h1>About Me</h1>
+                <p>I'm Tim Tan. I'm an <a href="https://www.eng.cam.ac.uk/research/academic-divisions/information-engineering">Information Engineering</a> student studying at <a href="https://cam.ac.uk">the University of Cambridge</a>. I like programming/composing.</p>
+                
+                <h2>Skills</h2>
+                <ul>
+                    <li>Python</li>
+                    <li>HTML/CSS</li>
+                    <li>C++</li>
+                    <li>Linux</li>
+                </ul>
+            </section>
+            
+            <!--Projects-->
+            <section id="projects" class="page">
                 <h2>Projects</h2>
                 <div class="project">
                     <h3><a href="https://www.revista.cc">Revista.cc</a></h3>
@@ -32,22 +64,11 @@
                     <p>Generator for a history timeline of famous figure/objects, subject to your input.</p>
                 </div>
             </section>
-        
-            <section id="skills">
-                <h2>Skills</h2>
-                <ul>
-                    <li>Python</li>
-                    <li>HTML/CSS</li>
-                    <li>C++</li>
-                    <li>Linux</li>
-                </ul>
+
+            <!--Composition-->
+            <section id="compositions" class="page">
+                Here is my recent music compositions. (2022-2024)
             </section>
-        
-            <section id="composition">
-                <h2>My composition</h2>
-                <p>(deleted)</p>
-            </section>
-        
 
         </main>
 
@@ -62,8 +83,83 @@
     </div>
 
     
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function initGallery() {
+                const images = document.querySelectorAll('.gallery-item');
+                let currentIndex = 0;
 
+                function switchImage() {
+                    // Remove active class from all images
+                    images.forEach(img => img.classList.remove('active'));
 
+                    // Add active class to next image
+                    currentIndex = (currentIndex + 1) % images.length;
+                    images[currentIndex].classList.add('active');
+                }
+
+                // Switch image every 4 seconds
+                return setInterval(switchImage, 1000);
+            }
+
+            // Keep track of gallery interval
+            let galleryInterval = null;
+
+            // Function to show page
+            function showPage(pageId) {
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(page => {
+                    page.style.display = 'none';
+                });
+
+                // Show selected page
+                const pageToShow = document.getElementById(pageId);
+                if (pageToShow) {
+                    pageToShow.style.display = 'block';
+
+                    // Clear existing gallery interval if it exists
+                    if (galleryInterval) {
+                        clearInterval(galleryInterval);
+                    }
+
+                    // Initialize gallery if we're on home page
+                    if (pageId === 'home') {
+                        galleryInterval = initGallery();
+                    }
+                }
+
+                // Update active state in sidebar
+                document.querySelectorAll('.sidebar a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Handle clicks on sidebar links
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const pageId = link.getAttribute('data-page');
+                    if (pageId) { // Only handle links with data-page attribute
+                        e.preventDefault();
+                        showPage(pageId);
+                    }
+                });
+            });
+
+            // Handle initial page load and hash changes
+            function handleHashChange() {
+                const hash = window.location.hash.slice(1) || 'home';
+                showPage(hash);
+            }
+
+            window.addEventListener('hashchange', handleHashChange);
+
+            // Show initial page and start gallery if on home page
+            handleHashChange();
+        });     
+    </script>
 
 </body>
 </html>
