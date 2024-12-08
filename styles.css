@@ -1,10 +1,79 @@
+@font-face {
+    font-family: "NaNSuccessText-Black";
+    src: url(properties/fonts/NaNSuccessText-Black.ttf) format('truetype');
+    src: url(properties/fonts/NaNSuccessText-Black.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: "NaNWeiss-Regular";
+    src: url(properties/fonts/NaNWeiss-Regular.ttf) format('truetype');
+    src: url(properties/fonts/NaNWeiss-Regular.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: "OPPOSans-Medium";
+    src: url(properties/fonts/OPPOSans-Medium.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: "OPPOSans-Bold";
+    src: url(properties/fonts/OPPOSans-Bold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: "NaNWeiss-ExtraBlack";
+    src: url(properties/fonts/NaNWeiss-ExtraBlack.ttf) format('truetype');
+}
+
+
+
 body {
+    margin: 0;
+    padding: 0;
     background-color: #e7e7e7;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 0 auto;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: minmax(200px, 15%) 1fr minmax(200px, 15%);;
+    min-height: 100vh;
+}
+
+.sidebar {
+    position: fixed;
+    width: 15%;
+    height: 100vh;
+    overflow-y: auto;
     padding: 20px;
+    border-right: 2px solid #000;
+    box-sizing: border-box;
+}
+
+.sidebar a {
+    display: block; /* full width */
+    margin-bottom: 15px;
+    text-decoration: none;
+    color:#000;
+    font-size: 2.5rem;
+    font-family: "NaNSuccessText-Black";
+}
+
+.content {
+    grid-column: 2;  /* Place in second column */
+    padding: 20px;
+    overflow-y: auto;
+    margin-left: 2%;
+    margin-right: 2%;
+    font-family: "OPPOSans-Medium";
+}
+
+.right-column {
+    grid-column: 3;  /* Third column */
+    padding: 20px;
+    border-left: 2px solid #000;
+    height: 100vh;
+    box-sizing: border-box;
+    font-family: "OPPOSans-Medium";
 }
 
 nav {
@@ -28,7 +97,11 @@ section {
 }
 
 h1, h2 {
-    margin-bottom: 15px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    font-family: 'NaNWeiss-Regular';
 }
 
 a {
