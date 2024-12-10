@@ -109,6 +109,7 @@
             function showPage(pageId) {
                 // Hide all pages
                 document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
                     page.style.display = 'none';
                 });
 
@@ -116,6 +117,10 @@
                 const pageToShow = document.getElementById(pageId);
                 if (pageToShow) {
                     pageToShow.style.display = 'block';
+
+                    setTimeout(() => {
+                        pageToShow.classList.add('active');
+                    }, 10)
 
                     // Clear existing gallery interval if it exists
                     if (galleryInterval) {
