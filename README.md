@@ -1,7 +1,5 @@
 # tan-t.im
 
-![image](https://github.com/user-attachments/assets/b86fa651-81a1-40e5-a429-bc213a0e5e0f)
-
 This is a simple personal portfolio website I created to showcase and blogging. 
 
 I like vanilla HTML/CSS.
